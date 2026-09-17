@@ -11,16 +11,23 @@
       <header class="topbar">
         <div class="brand"><span class="brand-mark">T2</span><div><b>冷熱水回水系統</b><small>INTERACTIVE SYSTEM MODEL</small></div></div>
         <div class="status"><i></i><span>概念設計模型</span></div>
+        <button id="mobile-controls" class="mobile-only" aria-controls="control-panel" aria-expanded="false">控制</button>
       </header>
 
       <section id="viewport" aria-label="3D 系統模型">
         <div id="loading"><span>載入 3D 工程模型</span><div><i></i></div><small id="load-progress">0%</small></div>
-        <div class="view-label"><span id="mode-label">待機模式</span><small>拖曳旋轉 · 滾輪縮放 · 右鍵平移</small></div>
-        <button id="reset-view" class="icon-button" title="重設視角" aria-label="重設視角">⌂</button>
+        <div class="view-label"><span id="mode-label">待機模式</span><small>拖曳旋轉，雙指縮放與平移</small></div>
+        <nav class="view-presets" aria-label="模型視角">
+          <button data-view="system" class="active">系統</button>
+          <button data-view="wet">衛浴</button>
+          <button data-view="all">全棟</button>
+        </nav>
+        <button id="reset-view" class="icon-button" title="重設視角" aria-label="重設視角">重設</button>
         <div id="tooltip" role="status"></div>
       </section>
 
-      <aside class="controls">
+      <div id="panel-backdrop" class="backdrop" hidden></div>
+      <aside class="controls" id="control-panel" aria-label="系統控制台">
         <div class="panel-head"><div><span>系統控制台</span><b id="clock">00:00</b></div><button id="panel-toggle" aria-label="收合控制台">−</button></div>
 
         <div class="control-body">
@@ -46,7 +53,19 @@
               <label><input type="checkbox" data-layer="hot" checked><i class="hot"></i><span>熱水</span></label>
               <label><input type="checkbox" data-layer="return" checked><i class="return"></i><span>回水</span></label>
               <label><input type="checkbox" data-layer="equipment" checked><i class="equipment"></i><span>設備</span></label>
+              <label><input type="checkbox" data-layer="fixtures" checked><i class="fixtures"></i><span>衛浴末端</span></label>
               <label><input type="checkbox" data-layer="building" checked><i class="building"></i><span>建築</span></label>
+            </div>
+          </section>
+
+          <section class="control-section">
+            <h2>設備定位與大樣</h2>
+            <div class="equipment-index" id="equipment-index">
+              <button data-focus="Concept_Pressurized_Storage_Tank" data-info="Concept_Pressurized_Storage_Tank">儲熱桶</button>
+              <button data-focus="Concept_Cold_Constant_Pressure_Pump" data-info="Concept_Cold_Constant_Pressure_Pump">冷水恆壓泵</button>
+              <button data-focus="Concept_Return_Circulation_Pump" data-info="Concept_Return_Circulation_Pump">回水泵</button>
+              <button data-focus="Shower_Terminal" data-info="Shower_Terminal">淋浴末端</button>
+              <button data-focus="Basin_Terminal" data-info="Basin_Terminal">洗手盆末端</button>
             </div>
           </section>
 
@@ -62,11 +81,16 @@
 
       <section id="info-drawer" aria-live="polite">
         <button id="info-close" aria-label="關閉說明">×</button>
-        <small>設備說明</small><h2 id="info-title">選取設備</h2>
-        <p id="info-text">點選模型中的儲熱桶、恆壓泵、回水泵、溫控器或平衡閥查看系統功能。</p>
+        <small>設備與末端說明</small><h2 id="info-title">選取設備</h2>
+        <p id="info-text">點選模型中的儲熱桶、幫浦、閥件、淋浴柱或洗手盆查看功能與大樣依據。</p>
+        <div id="info-reference" hidden>
+          <span>參考大樣</span>
+          <a id="info-link" href="#" target="_blank" rel="noreferrer">開啟原廠尺寸圖</a>
+          <p id="info-note"></p>
+        </div>
       </section>
 
-      <footer><span>冷水 <i class="cold"></i></span><span>熱水 <i class="hot"></i></span><span>回水 <i class="return"></i></span><b>非施工圖 · 尺寸與管徑待設計確認</b></footer>
+      <footer><span>冷水 <i class="cold"></i></span><span>熱水 <i class="hot"></i></span><span>回水 <i class="return"></i></span><b>非施工圖，尺寸與管徑待設計確認</b></footer>
     </main>
     <script type="module" src="/src/main.js"></script>
   </body>
