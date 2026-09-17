@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#09110f" />
+    <title>T2 冷熱水回水系統｜3D 互動展示</title>
+  </head>
+  <body>
+    <main id="app">
+      <header class="topbar">
+        <div class="brand"><span class="brand-mark">T2</span><div><b>冷熱水回水系統</b><small>INTERACTIVE SYSTEM MODEL</small></div></div>
+        <div class="status"><i></i><span>概念設計模型</span></div>
+      </header>
+
+      <section id="viewport" aria-label="3D 系統模型">
+        <div id="loading"><span>載入 3D 工程模型</span><div><i></i></div><small id="load-progress">0%</small></div>
+        <div class="view-label"><span id="mode-label">待機模式</span><small>拖曳旋轉 · 滾輪縮放 · 右鍵平移</small></div>
+        <button id="reset-view" class="icon-button" title="重設視角" aria-label="重設視角">⌂</button>
+        <div id="tooltip" role="status"></div>
+      </section>
+
+      <aside class="controls">
+        <div class="panel-head"><div><span>系統控制台</span><b id="clock">00:00</b></div><button id="panel-toggle" aria-label="收合控制台">−</button></div>
+
+        <div class="control-body">
+          <section class="control-section">
+            <h2>運轉情境</h2>
+            <div class="segmented" id="modes">
+              <button class="active" data-mode="standby">待機</button>
+              <button data-mode="draw">末端用水</button>
+              <button data-mode="return">回水循環</button>
+              <button data-mode="combined">同時用水</button>
+            </div>
+          </section>
+
+          <section class="control-section">
+            <div class="section-title"><h2>流向動畫</h2><button id="play-toggle" class="text-button">暫停</button></div>
+            <label class="range-row"><span>速度</span><input id="speed" type="range" min="0" max="2" value="1" step="0.1"><output id="speed-value">1.0×</output></label>
+          </section>
+
+          <section class="control-section">
+            <h2>系統圖層</h2>
+            <div class="layers" id="layers">
+              <label><input type="checkbox" data-layer="cold" checked><i class="cold"></i><span>冷水</span></label>
+              <label><input type="checkbox" data-layer="hot" checked><i class="hot"></i><span>熱水</span></label>
+              <label><input type="checkbox" data-layer="return" checked><i class="return"></i><span>回水</span></label>
+              <label><input type="checkbox" data-layer="equipment" checked><i class="equipment"></i><span>設備</span></label>
+              <label><input type="checkbox" data-layer="building" checked><i class="building"></i><span>建築</span></label>
+            </div>
+          </section>
+
+          <section class="control-section telemetry">
+            <h2>即時狀態</h2>
+            <div class="metric"><span>儲熱桶上層</span><b id="temp-hot">60.0°C</b></div>
+            <div class="metric"><span>最遠端回水</span><b id="temp-return">50.0°C</b></div>
+            <div class="metric"><span>回水幫浦</span><b id="pump-status">停止</b></div>
+            <p>示意值用於解說控制邏輯，非現場量測或施工設定值。</p>
+          </section>
+        </div>
+      </aside>
+
+      <section id="info-drawer" aria-live="polite">
+        <button id="info-close" aria-label="關閉說明">×</button>
+        <small>設備說明</small><h2 id="info-title">選取設備</h2>
+        <p id="info-text">點選模型中的儲熱桶、恆壓泵、回水泵、溫控器或平衡閥查看系統功能。</p>
+      </section>
+
+      <footer><span>冷水 <i class="cold"></i></span><span>熱水 <i class="hot"></i></span><span>回水 <i class="return"></i></span><b>非施工圖 · 尺寸與管徑待設計確認</b></footer>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
